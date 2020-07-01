@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { URL } from '../utils/config';
 
 export default class CreateUser extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class CreateUser extends Component {
     }
 
     getUsers = () => {
-        axios.get('http://localhost:5000/users')
+        axios.get(URL+'users')
             .then(res => {
                 this.setState({ users: res.data })
             })
@@ -37,7 +38,7 @@ export default class CreateUser extends Component {
 
         if (isEdit) {
 
-            axios.post('http://localhost:5000/users/update', user)
+            axios.post(URL+'users/update', user)
                 .then(res => {
                     if (res.data.success) {
                         this.setState({
@@ -51,7 +52,7 @@ export default class CreateUser extends Component {
                     }
                 })
         } else {
-            axios.post('http://localhost:5000/users/add', user)
+            axios.post(URL+'users/add', user)
             .then(res => {
                 this.setState({ 
                     message: res.data.message,
@@ -93,7 +94,7 @@ export default class CreateUser extends Component {
 
     editUser = (id) => {
 
-        axios.get('http://localhost:5000/users/' + id)
+        axios.get(URL+'users/' + id)
             .then(res => {
                 this.setState({ 
                     username: res.data.username,
@@ -105,7 +106,7 @@ export default class CreateUser extends Component {
 
     deleteUser = (id) => {
         if (window.confirm("Do you want to delete this user?")) {
-            axios.delete('http://localhost:5000/users/' + id)
+            axios.delete(URL+'users/' + id)
             .then(res => {
                 if (res.data.success) {
                     this.setState({ 

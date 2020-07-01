@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { URL } from '../utils/config';
 
 export default class CreateExcercise extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class CreateExcercise extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/users')
+        axios.get(URL+'users')
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({
@@ -43,7 +44,7 @@ export default class CreateExcercise extends Component {
             date: date
         }
 
-        axios.post('http://localhost:5000/exercises/add', excercise)
+        axios.post(URL+'exercises/add', excercise)
             .then(res => {
                 if (res.data.success) {
                     this.props.history.push('/')

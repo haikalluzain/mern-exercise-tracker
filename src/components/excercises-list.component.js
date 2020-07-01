@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { URL } from '../utils/config';
 
 const Exercise = props => (
     <tr>
@@ -27,7 +28,7 @@ export default class ExercisesList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/exercises/')
+        axios.get(URL+'exercises/')
             .then(response => {
                 this.setState({ exercises: response.data })
             })
@@ -38,7 +39,7 @@ export default class ExercisesList extends Component {
 
     deleteExercise(id) {
         if (window.confirm("Are you sure want to delete this item?")){
-            axios.delete('http://localhost:5000/exercises/' + id)
+            axios.delete(URL+'exercises/' + id)
             .then(response => { 
                 if (response.data.success) {
                     this.setState({
